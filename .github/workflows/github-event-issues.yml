@@ -8,4 +8,5 @@ jobs:
         if: github.event.label.name == 'needs-testing'
         runs-on: ubuntu-latest
         steps:
-            - run: echo "Job's status is ${{ job.status }}. Issue ${{ github.event.issue.title || 'Unknown Issue Name' }} is ready for testing, set by ${{ github.actor }}. Issue assignee: ${{ github.event.issue.assignee.login || 'Unknown Issue Assignee' }}. Link: ${{ github.event.issue.html_url || 'Unknown Issue URL' }}."
+            - run: | 
+                echo "Jobs status is ${{ job.status }}. Issue ${{ github.event.issue.title || 'Unknown Issue Name' }} is ready for testing, set by ${{ github.actor }}. Issue assignee: ${{ github.event.issue.assignee.login || 'Unknown Issue Assignee' }}. Link: ${{ github.event.issue.html_url || 'Unknown Issue URL' }}."
