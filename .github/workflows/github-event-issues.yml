@@ -9,6 +9,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - run: | 
-                echo ${{ toJSON(format('Jobs status: {0}. Issue: *"{1}"* is ready for testing, set by {2}. Issue assignee: {3}. Link: {4}', job.status, github.event.issue.title || 'Unknown Issue Name', github.actor, github.event.issue.assignee.login || 'Unknown Issue Assignee', github.event.issue.html_url || 'Unknown Issue URL' ))}}
+                echo ${{ toJSON(format('Jobs status: {0}. Issue: *{1}* is ready for testing, set by {2}. Issue assignee: {3}. Link: {4}', job.status, github.event.issue.title || 'Unknown Issue Name', github.actor, github.event.issue.assignee.login || 'Unknown Issue Assignee', github.event.issue.html_url || 'Unknown Issue URL' ))}}
 
 
