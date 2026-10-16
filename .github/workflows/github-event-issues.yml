@@ -8,7 +8,19 @@ jobs:
         if: github.event.label.name == 'needs-testing'
         runs-on: ubuntu-latest
         steps:
-            - run: | 
+            - name: Just echo
+              run: | 
                 echo ${{ toJSON(format('Jobs status: {0}. Issue: *{1}* is ready for testing, set by {2}. Issue assignee: {3}. Link: {4}', job.status, github.event.issue.title || 'Unknown Issue Name', github.actor, github.event.issue.assignee.login || 'Unknown Issue Assignee', github.event.issue.html_url || 'Unknown Issue URL' ))}}
+            - name: Send notif to Slack when label added
+              uses: slackapi/slack-github-action@v4.0.0
+              with:
+                webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+                webhook-type: incoming-webhook
+                payload: |
+                    text: ${{ toJSON(format('testing... Issue: *{0}* is ready for testing, set by: {1}. Issue assignee: {2} . Link: {3}', github.event.issue.title || 'Unknown Issue Name', github.actor, github.event.issue.assignee.login || 'Unknown Issue Assignee', github.event.issue.html_url || 'Unknown Issue URL')) }}
+            - name: Announce job status
+              if: ${{ always() }}
+              run: | 
+                echo "Job status is ${{ job.status }}"
 
 
